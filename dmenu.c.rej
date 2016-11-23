@@ -1,0 +1,17 @@
+--- dmenu.c	Wed Dec 01 20:25:10 2010 +0000
++++ dmenu.c	Tue Dec 14 15:53:44 2010 +0300
+@@ -49,10 +51,10 @@
+ static size_t cursor = 0;
+ static const char *font = NULL;
+ static const char *prompt = NULL;
+-static const char *normbgcolor = "#cccccc";
+-static const char *normfgcolor = "#000000";
+-static const char *selbgcolor  = "#0066ff";
+-static const char *selfgcolor  = "#ffffff";
++static const char *normbgcolor = NULL;
++static const char *normfgcolor = NULL;
++static const char *selbgcolor  = NULL;
++static const char *selfgcolor  = NULL;
+ static unsigned long normcol[ColLast];
+ static unsigned long selcol[ColLast];
+ static Atom utf8;
