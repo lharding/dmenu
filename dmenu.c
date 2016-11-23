@@ -52,6 +52,7 @@ static const char *normbgcolor = NULL;
 static const char *normfgcolor = NULL;
 static const char *selbgcolor  = NULL;
 static const char *selfgcolor  = NULL;
+static const char *initialtext  = NULL;
 static unsigned int lines = 0;
 static unsigned long normcol[ColLast];
 static unsigned long selcol[ColLast];
@@ -87,10 +88,9 @@ main(int argc, char *argv[]) {
 			fstrncmp = strncasecmp;
 			fstrstr = cistrstr;
 		}
-		else if(!strcmp(argv[i], "-t"))
+		else if(!strcmp(argv[i], "-t"))   /* token-based matching */
 			match = matchtok;
-		else if(i+1 == argc)
-			usage();
+
 		/* these options take one argument */
 		else if(!strcmp(argv[i], "-l"))   /* number of lines in vertical list */
 			lines = atoi(argv[++i]);
@@ -106,6 +106,9 @@ main(int argc, char *argv[]) {
 			selbgcolor = argv[++i];
 		else if(!strcmp(argv[i], "-sf"))  /* selected foreground color */
 			selfgcolor = argv[++i];
+		else if(!strcmp(argv[i], "-it"))   /* initial text */
+                        initialtext = argv[++i];
+
 		else
 			usage();
 
@@ -666,6 +669,7 @@ setup(void) {
 
 	XMapRaised(dc->dpy, win);
 	resizedc(dc, mw, mh);
+        if(initialtext != NULL) insert(initialtext, strlen(initialtext));
 	drawmenu();
 }
 
